@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "553235828418",
+    "project_id": "train-checker-a51f4",
+    "storage_bucket": "train-checker-a51f4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:553235828418:android:27ddda79ccc4c734b5b55b",
+        "android_client_info": {
+          "package_name": "com.example.trainchecker"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5S3-13oZ1U8iXnb0neJmrq2fvudGGIZk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
