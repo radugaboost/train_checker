@@ -181,27 +181,7 @@ fun parseWorkoutFromJson(
     jsonString: String,
     locale: Locale,
 ): Workout {
-    val json = JSONObject(jsonString)
     val languageKey = if (locale.language == "ru") "ru" else "en"
-    val localizedJson = json.getJSONObject(languageKey)
-
-    val name = localizedJson.getString("name")
-    val muscles = localizedJson.getString("muscles")
-    val storagePath = localizedJson.getString("storagePath")
-
-    val exercisesJson = localizedJson.getJSONArray("exercises")
-    val exercises = mutableListOf<Exercise>()
-
-    for (i in 0 until exercisesJson.length()) {
-        val exerciseJson = exercisesJson.getJSONObject(i)
-        val exerciseName = exerciseJson.getString("name")
-        val repetitions = exerciseJson.getInt("repetitions")
-        val sets = exerciseJson.getInt("sets")
-        val description = exerciseJson.getString("description")
-        val image = exerciseJson.getString("image")
-
-        exercises.add(Exercise(exerciseName, repetitions, sets, description, image))
-    }
-
-    return Workout(name, muscles, storagePath, exercises)
+    val localizedJson = JSONObject(jsonString).getJSONObject(languageKey).toString()
+    return Gson().fromJson(localizedJson, Workout::class.java)
 }
