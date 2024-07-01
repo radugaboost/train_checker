@@ -73,4 +73,10 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.1.1"))
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-crashlytics")
+    implementation("com.google.firebase:firebase-storage")
+    implementation("com.google.firebase:firebase-firestore")
+    implementation("androidx.navigation:navigation-compose:2.5.3")
+    implementation(libs.androidx.material3)
+    implementation("com.google.code.gson:gson:2.8.6")
+    implementation("io.coil-kt:coil-compose:2.0.0")
 }
