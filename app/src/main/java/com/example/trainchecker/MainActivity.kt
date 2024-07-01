@@ -12,21 +12,19 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.navigation.compose.NavHost
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.trainchecker.screens.ExerciseDetailScreen
 import com.example.trainchecker.screens.InputScreen
-import com.example.trainchecker.screens.TrainingsScreen
 import com.example.trainchecker.screens.SettingsScreen
+import com.example.trainchecker.screens.TrainingsScreen
 import com.example.trainchecker.screens.WorkoutDetailScreen
 import com.example.trainchecker.ui.theme.AppTheme
-import java.util.Locale
 
 class MainActivity : ComponentActivity() {
-
     private lateinit var sharedPreferences: SharedPreferences
     private val localeViewModel: LocaleViewModel by viewModels()
 
@@ -42,16 +40,21 @@ class MainActivity : ComponentActivity() {
                 val context = LocalContext.current
                 val locale by localeViewModel.locale
 
-                CompositionLocalProvider(LocalContext provides context.createConfigurationContext(android.content.res.Configuration().apply {
-                    setLocale(locale)
-                })) {
+                CompositionLocalProvider(
+                    LocalContext provides
+                        context.createConfigurationContext(
+                            android.content.res.Configuration().apply {
+                                setLocale(locale)
+                            },
+                        ),
+                ) {
                     Surface(
                         color = MaterialTheme.colorScheme.background,
-                        modifier = Modifier.fillMaxSize()
+                        modifier = Modifier.fillMaxSize(),
                     ) {
                         NavHost(
                             navController,
-                            startDestination = if (isUserDataSaved()) "trainings" else "settings"
+                            startDestination = if (isUserDataSaved()) "trainings" else "settings",
                         ) {
                             composable("input") {
                                 InputScreen(navController, sharedPreferences)

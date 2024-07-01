@@ -1,6 +1,5 @@
 package com.example.trainchecker.screens
 
-import android.content.res.Resources.Theme
 import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -22,7 +21,10 @@ import kotlinx.coroutines.delay
 import java.net.URLDecoder
 
 @Composable
-fun ExerciseDetailScreen(navController: NavController, exercisesJson: String?) {
+fun ExerciseDetailScreen(
+    navController: NavController,
+    exercisesJson: String?,
+) {
     val decodedExercisesJson = URLDecoder.decode(exercisesJson ?: "", "UTF-8")
     val exercises = Gson().fromJson(decodedExercisesJson, Array<Exercise>::class.java).toList()
 
@@ -50,28 +52,31 @@ fun ExerciseDetailScreen(navController: NavController, exercisesJson: String?) {
     }
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(16.dp),
     ) {
         Text(
             text = exercise.name,
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
+            modifier = Modifier.align(Alignment.CenterHorizontally),
         )
         Spacer(modifier = Modifier.height(16.dp))
 
         if (imageUrl != null) {
             AsyncImage(
-                model = ImageRequest.Builder(LocalContext.current)
-                    .data(imageUrl)
-                    .build(),
+                model =
+                    ImageRequest.Builder(LocalContext.current)
+                        .data(imageUrl)
+                        .build(),
                 contentDescription = "image",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp)
-                    .align(Alignment.CenterHorizontally)
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .height(200.dp)
+                        .align(Alignment.CenterHorizontally),
             )
             Spacer(modifier = Modifier.height(16.dp))
         }
@@ -79,7 +84,7 @@ fun ExerciseDetailScreen(navController: NavController, exercisesJson: String?) {
         Text(
             text = exercise.description,
             fontSize = 16.sp,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
+            modifier = Modifier.align(Alignment.CenterHorizontally),
         )
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -87,7 +92,7 @@ fun ExerciseDetailScreen(navController: NavController, exercisesJson: String?) {
             text = stringResource(id = R.string.completed_sets, completedSets, exercise.sets),
             fontSize = 18.sp,
             fontWeight = FontWeight.Medium,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
+            modifier = Modifier.align(Alignment.CenterHorizontally),
         )
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -96,7 +101,7 @@ fun ExerciseDetailScreen(navController: NavController, exercisesJson: String?) {
                 text = stringResource(id = R.string.stopwatch, timerSeconds),
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
-                modifier = Modifier.align(Alignment.CenterHorizontally)
+                modifier = Modifier.align(Alignment.CenterHorizontally),
             )
             Spacer(modifier = Modifier.height(16.dp))
         }
@@ -110,7 +115,7 @@ fun ExerciseDetailScreen(navController: NavController, exercisesJson: String?) {
                     }
                     showNextSetButton = true
                 },
-                modifier = Modifier.align(Alignment.CenterHorizontally)
+                modifier = Modifier.align(Alignment.CenterHorizontally),
             ) {
                 Text(stringResource(id = R.string.start_exercise))
             }
@@ -138,7 +143,7 @@ fun ExerciseDetailScreen(navController: NavController, exercisesJson: String?) {
                         }
                     }
                 },
-                modifier = Modifier.align(Alignment.CenterHorizontally)
+                modifier = Modifier.align(Alignment.CenterHorizontally),
             ) {
                 if (currentSet < exercise.sets) {
                     Text(stringResource(id = R.string.next_set))
@@ -166,7 +171,7 @@ fun ExerciseDetailScreen(navController: NavController, exercisesJson: String?) {
                         navController.navigate("trainings")
                     }
                 },
-                modifier = Modifier.align(Alignment.CenterHorizontally)
+                modifier = Modifier.align(Alignment.CenterHorizontally),
             ) {
                 if (idx == exercises.size - 1) {
                     Text(stringResource(id = R.string.finish_workout))
@@ -180,7 +185,10 @@ fun ExerciseDetailScreen(navController: NavController, exercisesJson: String?) {
     }
 }
 
-fun getFirebaseImageUrl(imagePath: String, onComplete: (String) -> Unit) {
+fun getFirebaseImageUrl(
+    imagePath: String,
+    onComplete: (String) -> Unit,
+) {
     val storage = FirebaseStorage.getInstance()
     val storageRef = storage.reference.child(imagePath)
 

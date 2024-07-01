@@ -1,8 +1,8 @@
 package com.example.trainchecker
 
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import androidx.compose.runtime.State
 import java.util.Locale
 
 class LocaleViewModel : ViewModel() {

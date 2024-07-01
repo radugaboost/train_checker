@@ -1,6 +1,5 @@
 package com.example.trainchecker.screens
 
-import android.content.Context
 import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -29,7 +28,7 @@ data class Workout(
     val name: String = "",
     val muscles: String = "",
     val storagePath: String = "",
-    val exercises: List<Exercise> = listOf()
+    val exercises: List<Exercise> = listOf(),
 )
 
 data class Exercise(
@@ -37,11 +36,14 @@ data class Exercise(
     val repetitions: Int = 0,
     val sets: Int = 0,
     val description: String = "",
-    val image: String = ""
+    val image: String = "",
 )
 
 @Composable
-fun TrainingsScreen(navController: NavController, locale: Locale) {
+fun TrainingsScreen(
+    navController: NavController,
+    locale: Locale,
+) {
     var workouts by remember { mutableStateOf(listOf<Workout>()) }
     var isLoading by remember { mutableStateOf(true) }
 
@@ -51,24 +53,25 @@ fun TrainingsScreen(navController: NavController, locale: Locale) {
     }
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(16.dp),
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.End,
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             IconButton(
                 onClick = {
                     navController.navigate("settings")
                 },
-                modifier = Modifier.padding(end = 16.dp)
+                modifier = Modifier.padding(end = 16.dp),
             ) {
                 Icon(
                     imageVector = Icons.Default.Settings,
-                    contentDescription = stringResource(R.string.settings)
+                    contentDescription = stringResource(R.string.settings),
                 )
             }
         }
@@ -77,33 +80,34 @@ fun TrainingsScreen(navController: NavController, locale: Locale) {
             text = stringResource(R.string.trainings),
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
+            modifier = Modifier.align(Alignment.CenterHorizontally),
         )
         Spacer(modifier = Modifier.height(16.dp))
 
         if (isLoading) {
             Box(
                 modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
+                contentAlignment = Alignment.Center,
             ) {
                 CircularProgressIndicator()
             }
         } else if (workouts.isEmpty()) {
             Box(
                 modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
+                contentAlignment = Alignment.Center,
             ) {
                 Text(
                     text = stringResource(R.string.trainings_not_found),
                     fontSize = 18.sp,
-                    fontWeight = FontWeight.Medium
+                    fontWeight = FontWeight.Medium,
                 )
             }
         } else {
             Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(8.dp)
+                modifier =
+                    Modifier
+                        .fillMaxSize()
+                        .padding(8.dp),
             ) {
                 workouts.forEach { workout ->
                     WorkoutItem(workout = workout, navController = navController)
@@ -115,33 +119,37 @@ fun TrainingsScreen(navController: NavController, locale: Locale) {
 }
 
 @Composable
-fun WorkoutItem(workout: Workout, navController: NavController) {
+fun WorkoutItem(
+    workout: Workout,
+    navController: NavController,
+) {
     val workoutJson = URLEncoder.encode(Gson().toJson(workout), "UTF-8")
 
     Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.onSurface, shape = RoundedCornerShape(50))
-            .padding(16.dp)
-            .clickable {
-                navController.navigate("workoutDetail/$workoutJson")
-            }
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .background(MaterialTheme.colorScheme.onSurface, shape = RoundedCornerShape(50))
+                .padding(16.dp)
+                .clickable {
+                    navController.navigate("workoutDetail/$workoutJson")
+                },
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
                 text = workout.name,
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.surface
+                color = MaterialTheme.colorScheme.surface,
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = workout.muscles,
                 fontSize = 16.sp,
-                color = MaterialTheme.colorScheme.surface
+                color = MaterialTheme.colorScheme.surface,
             )
             Spacer(modifier = Modifier.height(8.dp))
         }
@@ -169,7 +177,10 @@ suspend fun fetchWorkoutsFromStorage(locale: Locale): List<Workout> {
     return workouts
 }
 
-fun parseWorkoutFromJson(jsonString: String, locale: Locale): Workout {
+fun parseWorkoutFromJson(
+    jsonString: String,
+    locale: Locale,
+): Workout {
     val json = JSONObject(jsonString)
     val languageKey = if (locale.language == "ru") "ru" else "en"
     val localizedJson = json.getJSONObject(languageKey)

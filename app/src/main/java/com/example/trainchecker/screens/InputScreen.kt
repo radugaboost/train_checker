@@ -10,7 +10,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
 @Composable
-fun InputScreen(navController: NavController, sharedPreferences: SharedPreferences) {
+fun InputScreen(
+    navController: NavController,
+    sharedPreferences: SharedPreferences,
+) {
     var name by remember { mutableStateOf(TextFieldValue(sharedPreferences.getString("name", "") ?: "")) }
     var weight by remember { mutableStateOf(TextFieldValue(sharedPreferences.getString("weight", "") ?: "")) }
     var height by remember { mutableStateOf(TextFieldValue(sharedPreferences.getString("height", "") ?: "")) }
@@ -20,28 +23,29 @@ fun InputScreen(navController: NavController, sharedPreferences: SharedPreferenc
     val intensityOptions = listOf("Low", "Medium", "High")
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.Center
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+        verticalArrangement = Arrangement.Center,
     ) {
         TextField(
             value = name,
             onValueChange = {
                 name = it
-            }
+            },
         )
         Spacer(modifier = Modifier.height(8.dp))
         TextField(
             value = weight,
             onValueChange = { weight = it },
-            label = { Text("Weight") }
+            label = { Text("Weight") },
         )
         Spacer(modifier = Modifier.height(8.dp))
         TextField(
             value = height,
             onValueChange = { height = it },
-            label = { Text("Height") }
+            label = { Text("Height") },
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text("Training Level")
@@ -51,7 +55,7 @@ fun InputScreen(navController: NavController, sharedPreferences: SharedPreferenc
             }
             DropdownMenu(
                 expanded = expanded,
-                onDismissRequest = { expanded = false }
+                onDismissRequest = { expanded = false },
             ) {
                 intensityOptions.forEach { option ->
                     DropdownMenuItem(
@@ -59,7 +63,7 @@ fun InputScreen(navController: NavController, sharedPreferences: SharedPreferenc
                         onClick = {
                             intensity = option
                             expanded = false
-                        }
+                        },
                     )
                 }
             }
@@ -77,7 +81,13 @@ fun InputScreen(navController: NavController, sharedPreferences: SharedPreferenc
     }
 }
 
-fun saveUserData(sharedPreferences: SharedPreferences, name: String, weight: String, height: String, intensity: String) {
+fun saveUserData(
+    sharedPreferences: SharedPreferences,
+    name: String,
+    weight: String,
+    height: String,
+    intensity: String,
+) {
     val editor = sharedPreferences.edit()
     editor.putString("name", name)
     editor.putString("weight", weight)

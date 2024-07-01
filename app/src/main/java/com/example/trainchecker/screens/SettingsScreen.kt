@@ -3,7 +3,6 @@ package com.example.trainchecker.screens
 import android.content.SharedPreferences
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -15,6 +14,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusManager
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -28,7 +28,12 @@ import com.example.trainchecker.R
 import java.util.Locale
 
 @Composable
-fun SettingsScreen(navController: NavController, sharedPreferences: SharedPreferences, isDarkTheme: MutableState<Boolean>, localeViewModel: LocaleViewModel) {
+fun SettingsScreen(
+    navController: NavController,
+    sharedPreferences: SharedPreferences,
+    isDarkTheme: MutableState<Boolean>,
+    localeViewModel: LocaleViewModel,
+) {
     var name by remember { mutableStateOf(TextFieldValue(sharedPreferences.getString("name", "") ?: "")) }
     var weight by remember { mutableStateOf(TextFieldValue(sharedPreferences.getString("weight", "") ?: "")) }
     var height by remember { mutableStateOf(TextFieldValue(sharedPreferences.getString("height", "") ?: "")) }
@@ -44,29 +49,31 @@ fun SettingsScreen(navController: NavController, sharedPreferences: SharedPrefer
     val focusManager = LocalFocusManager.current
 
     Box(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier =
+            Modifier
+                .fillMaxSize(),
     ) {
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp)
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(16.dp),
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
             ) {
                 IconButton(onClick = { navController.navigate("trainings") }) {
                     Icon(
                         imageVector = Icons.Default.ArrowBack,
-                        contentDescription = "Back"
+                        contentDescription = "Back",
                     )
                 }
                 Text(
                     text = stringResource(R.string.settings),
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(start = 8.dp)
+                    modifier = Modifier.padding(start = 8.dp),
                 )
                 Spacer(modifier = Modifier.weight(1f))
                 IconButton(onClick = { isDarkTheme.value = !isDarkTheme.value }) {
@@ -78,14 +85,15 @@ fun SettingsScreen(navController: NavController, sharedPreferences: SharedPrefer
             }
             Spacer(modifier = Modifier.height(16.dp))
             Column(
-                modifier = Modifier
-                    .fillMaxWidth(1f)
-                    .fillMaxHeight(0.6f)
-                    .background(
-                        MaterialTheme.colorScheme.onSurface,
-                        shape = RoundedCornerShape(16.dp)
-                    )
-                    .padding(16.dp)
+                modifier =
+                    Modifier
+                        .fillMaxWidth(1f)
+                        .fillMaxHeight(0.6f)
+                        .background(
+                            MaterialTheme.colorScheme.onSurface,
+                            shape = RoundedCornerShape(16.dp),
+                        )
+                        .padding(16.dp),
             ) {
                 SettingTextInput(
                     name,
@@ -93,7 +101,7 @@ fun SettingsScreen(navController: NavController, sharedPreferences: SharedPrefer
                     R.string.name,
                     KeyboardType.Ascii,
                     focusManager,
-                    sharedPreferences
+                    sharedPreferences,
                 ) { name = it }
                 Spacer(modifier = Modifier.height(8.dp))
                 SettingTextInput(
@@ -102,7 +110,7 @@ fun SettingsScreen(navController: NavController, sharedPreferences: SharedPrefer
                     R.string.weight,
                     KeyboardType.Decimal,
                     focusManager,
-                    sharedPreferences
+                    sharedPreferences,
                 ) { weight = it }
                 Spacer(modifier = Modifier.height(8.dp))
                 SettingTextInput(
@@ -111,18 +119,18 @@ fun SettingsScreen(navController: NavController, sharedPreferences: SharedPrefer
                     R.string.height,
                     KeyboardType.Decimal,
                     focusManager,
-                    sharedPreferences
+                    sharedPreferences,
                 ) { height = it }
                 Spacer(modifier = Modifier.height(8.dp))
                 Row(
-                    verticalAlignment = Alignment.CenterVertically
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Text(
                         text = "${stringResource(R.string.language)}: ",
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold,
                         color = MaterialTheme.colorScheme.surface,
-                        modifier = Modifier.defaultMinSize(86.dp)
+                        modifier = Modifier.defaultMinSize(86.dp),
                     )
                     Box {
                         Button(onClick = { languageMenuExpanded = true }) {
@@ -131,7 +139,7 @@ fun SettingsScreen(navController: NavController, sharedPreferences: SharedPrefer
                         DropdownMenu(
                             expanded = languageMenuExpanded,
                             onDismissRequest = { languageMenuExpanded = false },
-                            modifier = Modifier.background(MaterialTheme.colorScheme.surface)
+                            modifier = Modifier.background(MaterialTheme.colorScheme.surface),
                         ) {
                             languages.forEach { language ->
                                 DropdownMenuItem(
@@ -143,7 +151,7 @@ fun SettingsScreen(navController: NavController, sharedPreferences: SharedPrefer
                                         }
                                         languageMenuExpanded = false
                                     },
-                                    text = { Text(language) }
+                                    text = { Text(language) },
                                 )
                             }
                         }
@@ -151,13 +159,13 @@ fun SettingsScreen(navController: NavController, sharedPreferences: SharedPrefer
                 }
                 Spacer(modifier = Modifier.height(8.dp))
                 Row(
-                    verticalAlignment = Alignment.CenterVertically
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Text(
                         text = "${stringResource(R.string.intensity)}: ",
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.surface
+                        color = MaterialTheme.colorScheme.surface,
                     )
                     Box {
                         Button(onClick = { intensityMenuExpanded = true }) {
@@ -166,7 +174,7 @@ fun SettingsScreen(navController: NavController, sharedPreferences: SharedPrefer
                         DropdownMenu(
                             expanded = intensityMenuExpanded,
                             onDismissRequest = { intensityMenuExpanded = false },
-                            modifier = Modifier.background(MaterialTheme.colorScheme.surface)
+                            modifier = Modifier.background(MaterialTheme.colorScheme.surface),
                         ) {
                             intensityOptions.forEach { option ->
                                 DropdownMenuItem(
@@ -175,7 +183,7 @@ fun SettingsScreen(navController: NavController, sharedPreferences: SharedPrefer
                                         saveData(sharedPreferences, "intensity", option)
                                         intensityMenuExpanded = false
                                     },
-                                    text = { Text(option) }
+                                    text = { Text(option) },
                                 )
                             }
                         }
@@ -202,29 +210,35 @@ private fun SettingTextInput(
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.surface,
-            modifier = Modifier.width(80.dp)
+            modifier = Modifier.width(80.dp),
         )
         Spacer(modifier = Modifier.width(16.dp))
         TextField(
             value = settingValue,
             onValueChange = onValueChange,
-            keyboardOptions = KeyboardOptions.Default.copy(
-                imeAction = ImeAction.Done,
-                keyboardType = keyboardType
-            ),
-            keyboardActions = KeyboardActions(
-                onDone = {
-                    focusManager.clearFocus()
-                    saveData(sharedPreferences, key, settingValue.text)
-                }
-            ),
+            keyboardOptions =
+                KeyboardOptions.Default.copy(
+                    imeAction = ImeAction.Done,
+                    keyboardType = keyboardType,
+                ),
+            keyboardActions =
+                KeyboardActions(
+                    onDone = {
+                        focusManager.clearFocus()
+                        saveData(sharedPreferences, key, settingValue.text)
+                    },
+                ),
             modifier = Modifier.weight(1f).height(54.dp),
-            textStyle = LocalTextStyle.current.copy(fontSize = 18.sp)
+            textStyle = LocalTextStyle.current.copy(fontSize = 18.sp),
         )
     }
 }
 
-fun saveData(sharedPreferences: SharedPreferences, key: String, value: String) {
+fun saveData(
+    sharedPreferences: SharedPreferences,
+    key: String,
+    value: String,
+) {
     val editor = sharedPreferences.edit()
     editor.putString(key, value)
     editor.apply()
