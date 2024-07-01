@@ -20,4 +20,7 @@
     <string name="start_workout">Start workout</string>
     <string name="sets">Sets</string>
     <string name="repetitions">Repetitions</string>
+    <string name="low">Low</string>
+    <string name="medium">Medium</string>
+    <string name="high">High</string>
 </resources>

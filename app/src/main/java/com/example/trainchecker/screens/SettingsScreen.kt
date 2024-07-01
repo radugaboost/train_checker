@@ -45,7 +45,12 @@ fun SettingsScreen(
     val languages = listOf("English", "Русский")
     val currentLocale = localeViewModel.locale.value
     val selectedLanguage = if (currentLocale.language == "ru") "Русский" else "English"
-    val intensityOptions = listOf("Low", "Medium", "High")
+    val intensityOptions =
+        listOf(
+            stringResource(R.string.low),
+            stringResource(R.string.medium),
+            stringResource(R.string.high),
+        )
     val focusManager = LocalFocusManager.current
 
     Box(
@@ -228,7 +233,10 @@ private fun SettingTextInput(
                         saveData(sharedPreferences, key, settingValue.text)
                     },
                 ),
-            modifier = Modifier.weight(1f).height(54.dp),
+            modifier =
+                Modifier
+                    .weight(1f)
+                    .height(54.dp),
             textStyle = LocalTextStyle.current.copy(fontSize = 18.sp),
         )
     }

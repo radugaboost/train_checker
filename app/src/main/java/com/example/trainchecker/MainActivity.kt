@@ -18,7 +18,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.trainchecker.screens.ExerciseDetailScreen
-import com.example.trainchecker.screens.InputScreen
 import com.example.trainchecker.screens.SettingsScreen
 import com.example.trainchecker.screens.TrainingsScreen
 import com.example.trainchecker.screens.WorkoutDetailScreen
@@ -56,9 +55,6 @@ class MainActivity : ComponentActivity() {
                             navController,
                             startDestination = if (isUserDataSaved()) "trainings" else "settings",
                         ) {
-                            composable("input") {
-                                InputScreen(navController, sharedPreferences)
-                            }
                             composable("settings") {
                                 SettingsScreen(navController, sharedPreferences, isDarkTheme, localeViewModel)
                             }
