@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">TrainChecker</string>
+    <string name="settings">Настройки</string>
+    <string name="name">Имя</string>
+    <string name="weight">Вес</string>
+    <string name="height">Рост</string>
+    <string name="intensity">Интенсивность</string>
+    <string name="edit_data">Редактировать данные</string>
+    <string name="completed_sets">Выполнено сетов: %1$d из %2$d</string>
+    <string name="stopwatch">Секундомер: %1$d</string>
+    <string name="start_exercise">Начать упражнение</string>
+    <string name="next_set">Следующий сет</string>
+    <string name="finish_exercise">Завершить упражнение</string>
+    <string name="next_exercise">Следующее упражнение</string>
+    <string name="finish_workout">Завершить тренировку</string>
+    <string name="trainings">Тренировки</string>
+    <string name="trainings_not_found">Тренировки не найдены</string>
+    <string name="language">Язык</string>
+    <string name="save_changes">Сохранить изменения</string>
+    <string name="start_workout">Начать тренировку</string>
+    <string name="sets">Подходов</string>
+    <string name="repetitions">Повторений</string>
+    <string name="low">Низкая</string>
+    <string name="medium">Средняя</string>
+    <string name="high">Высокая</string>
+</resources>
